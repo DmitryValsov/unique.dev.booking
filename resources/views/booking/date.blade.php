@@ -1,144 +1,140 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Выбор даты и времени</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #FFFFFF;
-            color: #002B5C;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .header {
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #ccc;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #fff;
-            z-index: 1000;
-        }
-        .back-button {
-            font-size: 24px;
-            margin-right: 15px;
-            cursor: pointer;
-        }
-        .header-title {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .header-subtitle {
-            font-size: 14px;
-            color: #666;
-        }
-        .content {
-            flex: 1;
-            padding: 20px;
-            margin-top: 70px; /* Высота хедера */
-            margin-bottom: 60px; /* Высота футера */
-            overflow-y: auto;
-        }
-        .section-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            margin-bottom: 20px;
-        }
-        .calendar div {
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .calendar div.disabled {
-            color: #ccc;
-            pointer-events: none;
-        }
-        .calendar div:hover {
-            background-color: #f0f0f0;
-        }
-        .selected-date {
-            background-color: #002B5C;
-            color: #fff;
-        }
-        .time-slots {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .time-slot {
-            padding: 10px 20px;
-            border: 1px solid #002B5C;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .time-slot.selected {
-            background-color: #002B5C;
-            color: #fff;
-        }
-        .button {
-            width: 100%;
-            padding: 15px;
-            background-color: #002B5C;
-            color: #fff;
-            text-align: center;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            position: fixed;
-            bottom: 70px; /* Чтобы кнопка была над футером */
-            left: 0;
-            z-index: 1000;
-        }
-        .footer {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid #ccc;
-            background-color: #FFFFFF;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        .footer-item {
-            text-align: center;
-            font-size: 12px;
-        }
-        .footer-icon {
-            font-size: 18px;
-            display: block;
-            margin-bottom: 5px;
-            color: #000;
-        }
-        .active .footer-icon {
-            color: #002B5C;
-        }
-    </style>
-</head>
-<body>
+@extends('layouts.app')
 
+@section('content')
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF;
+        color: #002B5C;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+    }
+    .header {
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #fff;
+        z-index: 1000;
+    }
+    .back-button {
+        font-size: 24px;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+    .header-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .header-subtitle {
+        font-size: 14px;
+        color: #666;
+    }
+    .content {
+        flex: 1;
+        padding: 20px;
+        margin-top: 70px; /* Высота хедера */
+        margin-bottom: 60px; /* Высота футера */
+        overflow-y: auto;
+    }
+    .section-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        margin-bottom: 20px;
+    }
+    .calendar div {
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .calendar div.disabled {
+        color: #ccc;
+        pointer-events: none;
+    }
+    .calendar div:hover {
+        background-color: #f0f0f0;
+    }
+    .selected-date {
+        background-color: #002B5C;
+        color: #fff;
+    }
+    .time-slots {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .time-slot {
+        padding: 10px 20px;
+        border: 1px solid #002B5C;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .time-slot.selected {
+        background-color: #002B5C;
+        color: #fff;
+    }
+    .button {
+        width: 100%;
+        padding: 15px;
+        background-color: #002B5C;
+        color: #fff;
+        text-align: center;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        position: fixed;
+        bottom: 70px; /* Чтобы кнопка была над футером */
+        left: 0;
+        z-index: 1000;
+    }
+    .footer {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        border-top: 1px solid #ccc;
+        background-color: #FFFFFF;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    .footer-item {
+        text-align: center;
+        font-size: 12px;
+    }
+    .footer-icon {
+        font-size: 18px;
+        display: block;
+        margin-bottom: 5px;
+        color: #000;
+    }
+    .active .footer-icon {
+        color: #002B5C;
+    }
+</style>
 <div class="header">
+    <a href="{{route('booking.auto')}}">
     <div class="back-button">←</div>
+    </a>
     <div>
         <div class="header-title">Базис-Сервис - Федюнинского, 83</div>
         <div class="header-subtitle">ул. Федюнинского, 83</div>
@@ -166,28 +162,7 @@
 
 <button class="button">Записаться</button>
 
-<div class="footer">
-    <div class="footer-item">
-        <div class="footer-icon">🏠</div>
-        <div>Главная</div>
-    </div>
-    <div class="footer-item">
-        <div class="footer-icon">🚗</div>
-        <div>Автомобиль</div>
-    </div>
-    <div class="footer-item active">
-        <div class="footer-icon">🏷️</div>
-        <div>Запись</div>
-    </div>
-    <div class="footer-item">
-        <div class="footer-icon">🔍</div>
-        <div>Новости</div>
-    </div>
-    <div class="footer-item">
-        <div class="footer-icon">💬</div>
-        <div>Поддержка</div>
-    </div>
-</div>
+
 
 <script>
     function createCalendar() {
@@ -251,5 +226,6 @@
     });
 </script>
 
-</body>
-</html>
+
+
+@endsection

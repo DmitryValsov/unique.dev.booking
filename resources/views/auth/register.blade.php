@@ -1,7 +1,6 @@
 @extends('layouts.auth')
 
 @section('content')
-
     <style>
         body {
             margin: 0;
@@ -59,21 +58,27 @@
         }
 
     </style>
-
-
-
     <div class="container">
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
         <div class="title">Ваши данные</div>
         <div class="form-group">
             <label for="name" class="form-label">Имя*</label>
-            <input type="text" id="name" class="input" placeholder="Введите имя" required>
+            <input type="text" id="name" name="name" class="input" placeholder="Введите имя" required>
         </div>
         <div class="form-group">
             <label for="email" class="form-label">E-Mail*</label>
-            <input type="email" id="email" class="input" placeholder="Введите email" required>
+            <input type="email" id="email" name="email" class="input" placeholder="Введите email" required>
         </div>
+            <div class="form-group">
+                <label for="name" class="form-label">Пароль*</label>
+                <input type="text" id="name" name="password" class="input" placeholder="Введите имя" required>
+            </div>
+            <div class="form-group">
+                <label for="name" class="form-label">Подтверждение пароля*</label>
+                <input type="text" id="name" name="password_confirmation" class="input" placeholder="Введите имя" required>
+            </div>
         <button class="button">Стать клиентом</button>
+        </form>
     </div>
-
-
 @endsection

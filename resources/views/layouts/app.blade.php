@@ -8,23 +8,63 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-
     <!-- Scripts -->
     <script src="{{ asset('js/script.js') }}"></script>
     <!--Styles-->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
 </head>
 <body>
+<div class="main">
             @yield('content')
 
 
-            <!-- Scripts -->
-            <script src="{{ asset('js/script.js') }}"></script>
+
+
+
+
+
+
+
+    <div class="add-button">+</div>
+
+    <div class="footer">
+        <div class="footer-item active">
+
+            <a href="{{route('index')}}">
+            <div class="footer-icon">🏠</div>
+            <div>
+                Главная
+            </div>
+            </a>
+
+        </div>
+        <div class="footer-item">
+            <div class="footer-icon">🚗</div>
+            <div>Автомобиль</div>
+        </div>
+
+        <a href="{{route('booking.index')}}">
+        <div class="footer-item">
+            <div class="footer-icon">🏷️</div>
+            <div>Запись</div>
+        </div>
+        </a>
+
+        <div class="footer-item">
+            <div class="footer-icon">🔍</div>
+            <div>Новости</div>
+        </div>
+        <div class="footer-item">
+            <div class="footer-icon">💬</div>
+            <div>Поддержка</div>
+        </div>
+    </div>
+
+
+
+</div>
 </body>
 </html>
